@@ -1,0 +1,1 @@
+To use these, add this directory to the Windows 'PATH' environment variable.
