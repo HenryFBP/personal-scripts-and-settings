@@ -10,12 +10,15 @@ default_sqlite_location = r'chrome_info\Default\User Data\Default'
 
 @click.command()
 @click.option('--input', default=default_sqlite_location, type=str)
-@click.option('--output', default=os.path.join(default_sqlite_location, 'passwords.txt'), type=str)
+@click.option('--output', type=str)
 @click.option('--overwrite', default=False, type=bool)
 def cli(input: str, output: str, overwrite: bool):
 
     if not os.path.isabs(input):
         input = os.path.join(os.path.dirname(sys.argv[0]), input)
+
+    if output is None:
+        output = os.path.join(os.path.dirname(input), 'passwords.txt')
 
     if not os.path.isabs(output):
         output = os.path.join(os.path.dirname(sys.argv[0]), output)
@@ -38,6 +41,7 @@ def cli(input: str, output: str, overwrite: bool):
 
         for user in users:
             f.write(str(user))
+            f.write('\n')
 
         f.close()
 
