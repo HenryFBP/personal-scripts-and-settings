@@ -4,7 +4,7 @@ import sys
 
 import click
 
-data_location = r'AppData\Local\Google\Chrome\User Data\Default'
+data_location = r'AppData\Local\Google\Chrome\User Data\Default\Login Data'
 
 
 def walk_through_files(path):
@@ -53,7 +53,10 @@ def dump(users_dir: str, output_dir: str, users: str, overwrite: bool):
 
 
 def copy_chrome_user_data(src: str, dest: str, overwrite: bool = False):
-    copy_tree(src, dest, overwrite)
+    if os.path.isfile(src):
+        copy_file(src, dest)
+    elif os.path.isdir(src):
+        copy_tree(src, dest, overwrite)
 
 
 def copy_file(src, dest, overwrite=False):
