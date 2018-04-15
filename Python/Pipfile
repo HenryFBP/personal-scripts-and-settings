@@ -5,6 +5,8 @@ name = "pypi"
 
 [packages]
 click = "*"
+"pypiwin32" = "*"
+"pywin32" = "*"
 
 [dev-packages]
 
